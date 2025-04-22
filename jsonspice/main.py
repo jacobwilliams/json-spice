@@ -1,4 +1,5 @@
-from spiceypy import furnsh, tparse, pdpool, pcpool, dtpool, gcpool, gdpool, dvpool
+import spiceypy
+from spiceypy import tparse, pdpool, pcpool, dtpool, gcpool, gdpool, dvpool
 try:
     # this will allow loading JSON files with comments
     import json5 as json
@@ -6,6 +7,15 @@ except:
     # if not present, fallback to regular json (won't allow comments)
     import json
 
+class spiceypy_cache:
+    # just to cache the original furnsh function
+    furnsh = spiceypy.spiceypy.furnsh
+
+def monkey_patch_spiceypy():
+    """
+    Monkey patch the `furnsh` function in spiceypy to support JSON kernels.
+    """
+    spiceypy.spiceypy.furnsh = furnsh_json_kernel
 
 def furnsh_json_kernel(kernel_path: str) -> None:
     """
@@ -21,7 +31,7 @@ def furnsh_json_kernel(kernel_path: str) -> None:
 
     if not kernel_path.lower().endswith('.json'):
         # in this case, just use a normal furnsh
-        furnsh(kernel_path)
+        spiceypy_cache.furnsh(kernel_path)
     else:
         # use the custom routine:
         with open(kernel_path, 'r') as f:
