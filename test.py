@@ -33,3 +33,9 @@ print(v)
 spiceypy.furnsh('test.json')
 v = spiceypy.gdpool('time', 0, 10)
 print(v)
+
+# an example of an invalid @ string, that just returns a string:
+jsonspice.furnsh_dict({"time2": '@SYNTAX-ERROR'})
+v = spiceypy.gcpool('time2', 0, 10)
+print(v)
+

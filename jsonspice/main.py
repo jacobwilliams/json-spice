@@ -61,35 +61,30 @@ def furnsh_dict(data: dict) -> None:
             n = len(value)
             if n == 0:
                 raise Exception("Empty arrays are not supported in JSON SPICE kernels.")
-
+            
             # first if any are strings, check for @ syntax and convert to int
-            value = [tparse(x[1:])[0] if isinstance(x, str) and x.startswith('@') else x for x in value]
+            value = [tparse_wrapper(x) for x in value]  # apply tparse to all elements
 
             # what is the type of this list?
             if all(isinstance(x, str) for x in value):
                 # a list of strings
-                type = str
+                t = str
             elif all(isinstance(x, int) or isinstance(x, float) or isinstance(x, bool) for x in value):
                 # a list of integers, floats, bools
-                type = float
+                t = float
                 value = [float(x) for x in value]
             else:
                 raise Exception("Unsupported array type in JSON SPICE kernel.")
 
         elif isinstance(value, str):
             n = 1
-            if value.startswith('@'):
-                # a string with @ syntax, convert to UTC seconds past J2000
-                type = float
-                value = [tparse(value[1:])[0]]
-            else:
-                # a normal string
-                type = str
-                value = [value]
+            value = tparse_wrapper(value)
+            t = type(value)
+            value = [value]
 
         elif isinstance(value, (int, float, bool)):
             n = 1
-            type = float
+            t = float
             value = [float(value)]
 
         elif isinstance(value, dict):
@@ -107,12 +102,12 @@ def furnsh_dict(data: dict) -> None:
 
             if found:
                 if typeout == 'C':  # character
-                    if type == str:
+                    if t == str:
                         values = [str(s) for s in gcpool(item, 0, n)]
                     else:
                         raise Exception("Cannot add to existing character variable with a non-string value.")
                 elif typeout == 'N':  # numeric
-                    if type == float:
+                    if t == float:
                         values = [float(x) for x in gdpool(item, 0, n)]
                     else:
                         raise Exception("Cannot add to existing numeric variable with a non-float value.")
@@ -124,11 +119,22 @@ def furnsh_dict(data: dict) -> None:
                     raise Exception(f"Variable '{item}' not found in SPICE pool for += operation.")
 
         # add the variable
-        if type == float:
+        if t == float:
             pdpool ( item, value )
-        elif type == str:
+        elif t == str:
             pcpool ( item, value )
 
+def tparse_wrapper(x):
+    """wrapper for `tparse` to either return the result or the original string if parsing fails."""
+    if isinstance(x, str) and x.startswith('@'):
+        # convert to UTC seconds past J2000
+        val, msg = tparse(x[1:])  
+        if msg:
+            return x  # as is 
+        else:
+            return val
+    else: 
+        return x
 
 
     
