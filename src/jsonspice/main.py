@@ -31,13 +31,13 @@ def furnsh_json_kernel(kernel_path: str | dict | Iterable[str]) -> None:
         The path(s) to the JSON kernel file(s) or a dictionary containing the kernel data.
     """
 
-    if spiceypy.stypes.is_iterable(kernel_path):
+    if isinstance(kernel_path, dict):
+        # if a dictionary is passed, use it directly
+        furnsh_dict(kernel_path)
+    elif spiceypy.stypes.is_iterable(kernel_path):
         # if an iterable is passed, assume it is a list of paths
         for p in kernel_path:
             furnsh_json_kernel(p)
-    elif isinstance(kernel_path, dict):
-        # if a dictionary is passed, use it directly
-        furnsh_dict(kernel_path)
     elif isinstance(kernel_path, str):
         if not kernel_path.lower().endswith('.json'):
             # in this case, just use a normal furnsh
@@ -83,7 +83,7 @@ def furnsh_dict(data: dict) -> None:
             if all(isinstance(x, str) for x in value):
                 # a list of strings
                 t = str
-            elif all(isinstance(x, int) or isinstance(x, float) or isinstance(x, bool) for x in value):
+            elif all(isinstance(x, (int, bool, float)) for x in value):
                 # a list of integers, floats, bools
                 t = float
                 value = [float(x) for x in value]
