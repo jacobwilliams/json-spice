@@ -1,5 +1,6 @@
 import spiceypy
 from spiceypy import tparse, pdpool, pcpool, dtpool, gcpool, gdpool, dvpool
+from typing import Iterable
 try:
     # this will allow loading JSON files with comments
     import json5 as json
@@ -18,7 +19,7 @@ def monkey_patch_spiceypy():
     spiceypy.spiceypy.furnsh = furnsh_json_kernel
     spiceypy.furnsh = furnsh_json_kernel
 
-def furnsh_json_kernel(kernel_path: str | dict) -> None:
+def furnsh_json_kernel(kernel_path: str | dict | Iterable[str]) -> None:
     """
     Load a JSON kernel into SPICE.
 
@@ -26,11 +27,15 @@ def furnsh_json_kernel(kernel_path: str | dict) -> None:
 
     Parameters
     ----------
-    kernel_path : str | dict
-        The path to the JSON kernel file or a dictionary containing the kernel data.
+    kernel_path : str | list of strings | dict
+        The path(s) to the JSON kernel file(s) or a dictionary containing the kernel data.
     """
 
-    if isinstance(kernel_path, dict):
+    if spiceypy.stypes.is_iterable(kernel_path):
+        # if an iterable is passed, assume it is a list of paths
+        for p in kernel_path:
+            furnsh_json_kernel(p)
+    elif isinstance(kernel_path, dict):
         # if a dictionary is passed, use it directly
         furnsh_dict(kernel_path)
     elif isinstance(kernel_path, str):
