@@ -1,4 +1,4 @@
-import jsonspice
+import jsonspice  # import this one first to monkeypatch spiceypy
 import spiceypy
 
 # v = spiceypy.gdpool('hello', 0, 10)

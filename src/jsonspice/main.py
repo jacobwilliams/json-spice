@@ -16,8 +16,9 @@ def monkey_patch_spiceypy():
     Monkey patch the `furnsh` function in spiceypy to support JSON kernels.
     """
     spiceypy.spiceypy.furnsh = furnsh_json_kernel
+    spiceypy.furnsh = furnsh_json_kernel
 
-def furnsh_json_kernel(kernel_path: str) -> None:
+def furnsh_json_kernel(kernel_path: str | dict) -> None:
     """
     Load a JSON kernel into SPICE.
 
@@ -25,18 +26,24 @@ def furnsh_json_kernel(kernel_path: str) -> None:
 
     Parameters
     ----------
-    kernel_path : str
-        The path to the JSON kernel file.
+    kernel_path : str | dict
+        The path to the JSON kernel file or a dictionary containing the kernel data.
     """
 
-    if not kernel_path.lower().endswith('.json'):
-        # in this case, just use a normal furnsh
-        spiceypy_cache.furnsh(kernel_path)
+    if isinstance(kernel_path, dict):
+        # if a dictionary is passed, use it directly
+        furnsh_dict(kernel_path)
+    elif isinstance(kernel_path, str):
+        if not kernel_path.lower().endswith('.json'):
+            # in this case, just use a normal furnsh
+            spiceypy_cache.furnsh(kernel_path)
+        else:
+            # use the custom routine:
+            with open(kernel_path, 'r') as f:
+                data = json.load(f)
+            furnsh_dict(data)
     else:
-        # use the custom routine:
-        with open(kernel_path, 'r') as f:
-            data = json.load(f)
-        furnsh_dict(data)
+        raise TypeError("kernel_path must be a string or a dictionary.")
 
 def furnsh_dict(data: dict) -> None:
     """
