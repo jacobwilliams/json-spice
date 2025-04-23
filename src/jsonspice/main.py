@@ -4,7 +4,7 @@ from typing import Iterable
 try:
     # this will allow loading JSON files with comments
     import json5 as json
-except:
+except ImportError:
     # if not present, fallback to regular json (won't allow comments)
     import json
 
@@ -56,8 +56,10 @@ def furnsh_dict(data: dict) -> None:
 
     Note: there are two modifications to support JSON SPICE kernels:
 
-    1. if the variable name starts with '+', then the SPICE '+=' syntax is used to add to an existing variable if it exists.
-    2. if a string value starts with '@', it is treated as a UTC string and converted to a double precision number representing "UTC seconds past J2000".
+    1. if the variable name starts with '+', then the SPICE '+=' syntax 
+       is used to add to an existing variable if it exists.
+    2. if a string value starts with '@', it is treated as a UTC string 
+       and converted to a double precision number representing "UTC seconds past J2000".
 
     Reference: https://degenerateconic.com/json-spice.html
 
@@ -140,15 +142,10 @@ def tparse_wrapper(x):
     """wrapper for `tparse` to either return the result or the original string if parsing fails."""
     if isinstance(x, str) and x.startswith('@'):
         # convert to UTC seconds past J2000
-        val, msg = tparse(x[1:])  
+        val, msg = tparse(x[1:])
         if msg:
-            return x  # as is 
+            return x  # as is
         else:
             return val
-    else: 
+    else:
         return x
-
-
-    
-
-
