@@ -12,7 +12,6 @@ license = {text = "MIT License"}
 
 dependencies = [
     "spiceypy",
-    "numpy",
     "json5",
 ]
 
