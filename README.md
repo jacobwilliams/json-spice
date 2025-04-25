@@ -37,7 +37,7 @@ VARIABLE2  = 42.0
 
 Has the equivalent JSON kernel representation:
 
-```json
+```json5
 // An example kernel
 {
     "time3": "@1972-JAN-1",
