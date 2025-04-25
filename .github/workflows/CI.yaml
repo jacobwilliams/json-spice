@@ -37,4 +37,6 @@ jobs:
         ls -la
         ls -la ./dist
         python -m pip install dist/*.whl
+        cd ./tests
+        python ./test.py
 
