@@ -56,9 +56,9 @@ def furnsh_dict(data: dict) -> None:
 
     Note: there are two modifications to support JSON SPICE kernels:
 
-    1. if the variable name starts with '+', then the SPICE '+=' syntax 
+    1. if the variable name starts with '+', then the SPICE '+=' syntax
        is used to add to an existing variable if it exists.
-    2. if a string value starts with '@', it is treated as a UTC string 
+    2. if a string value starts with '@', it is treated as a UTC string
        and converted to a double precision number representing "UTC seconds past J2000".
 
     Reference: https://degenerateconic.com/json-spice.html
@@ -75,7 +75,7 @@ def furnsh_dict(data: dict) -> None:
             n = len(value)
             if n == 0:
                 raise Exception("Empty arrays are not supported in JSON SPICE kernels.")
-            
+
             # first if any are strings, check for @ syntax and convert to int
             value = [tparse_wrapper(x) for x in value]  # apply tparse to all elements
 
@@ -103,7 +103,7 @@ def furnsh_dict(data: dict) -> None:
 
         elif isinstance(value, dict):
             raise Exception("Nested dictionaries are not supported in JSON SPICE kernels.")
-                    
+
         # check for += and add to existing variable if it exists
         if item.startswith('+'):
 
