@@ -76,6 +76,7 @@ spiceypy.furnsh({"+abc": [4,5,6]})
 
 ### See also
 
+* [jsonspice](https://pypi.org/project/jsonspice/) at the Python Package Index
 * [NAIF](https://naif.jpl.nasa.gov/naif/) -- NASA's Navigation and Ancillary Information Facility
 * [PCK Required Reading](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html) (NAIF)
 * [SpiceyPy](https://github.com/AndrewAnnex/SpiceyPy) -- SpiceyPy: a Pythonic Wrapper for the SPICE Toolkit
