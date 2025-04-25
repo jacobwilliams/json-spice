@@ -1,8 +1,8 @@
 # json-spice
 Python utility to allow JSON kernels in SpiceyPy.
 
-[![CI Status](https://github.com/jacobwilliams/psqp/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/psqp/actions)
-[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/psqp)](https://github.com/jacobwilliams/psqp/commits/master)
+[![CI Status](https://github.com/jacobwilliams/jsonspice/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/jsonspice/actions)
+[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/jsonspice)](https://github.com/jacobwilliams/jsonspice/commits/master)
 
 ### Description
 
