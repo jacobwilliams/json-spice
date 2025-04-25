@@ -16,8 +16,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jacobwilliams/json-spice"
-Issues = "https://github.com/jacobwilliams/json-spice/issues"
+Homepage = "https://github.com/jacobwilliams/jsonspice"
+Issues = "https://github.com/jacobwilliams/jsonspice/issues"
 
 [tool.pixi.project]
 channels = ["conda-forge"]

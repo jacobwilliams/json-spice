@@ -1,4 +1,4 @@
-# json-spice
+# jsonspice
 Python utility to allow JSON kernels in SpiceyPy.
 
 [![CI Status](https://github.com/jacobwilliams/jsonspice/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/jsonspice/actions)
