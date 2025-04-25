@@ -31,7 +31,7 @@ An example kernel
 TIME3      = @1972-JAN-1
 AAA        = 1
 AAA       += 2
-VARIABLE   = [1.0 2.0 3.0]
+VARIABLE   = (1.0 2.0 3.0)
 VARIABLE2  = 42.0
 ```
 
