@@ -7,7 +7,7 @@ Python utility to allow JSON kernels in SpiceyPy.
 ### Description
 
 The standard [text kernel format](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html) for the [SPICE Toolkit](https://naif.jpl.nasa.gov/naif/toolkit.html) is the "PCK" file (with extension `.tpc`). Examples of these files can be seen [here](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/).
-The PCK file is a data file format that exists in no other domain. So, may be more convenient to use a standard file format such as [JSON](https://www.json.org/json-en.html), as well as native Python dictionaries. The `jsonspice` library allows you to do this by [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch#:~:text=In%20computer%20programming%2C%20monkey%20patching,altering%20the%20original%20source%20code.) [SpiceyPy](https://github.com/AndrewAnnex/SpiceyPy) so that JSON kernels will "just work".
+The PCK file is a data file format that exists in no other domain. So, it may be more convenient to use a standard file format such as [JSON](https://www.json.org/json-en.html), as well as native Python dictionaries. The `jsonspice` library allows you to do this by [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch#:~:text=In%20computer%20programming%2C%20monkey%20patching,altering%20the%20original%20source%20code.) [SpiceyPy](https://github.com/AndrewAnnex/SpiceyPy) so that JSON kernels will "just work".
 
 ### Installation
 

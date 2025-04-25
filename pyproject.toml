@@ -21,7 +21,7 @@ Issues = "https://github.com/jacobwilliams/jsonspice/issues"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = []
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 
 [tool.pixi.dependencies]
 pip = "*"
