@@ -1,5 +1,6 @@
 # jsonspice
-Python utility to allow JSON kernels in SpiceyPy.
+
+Python library to monkeypatch SpiceyPy to allow JSON kernels (and Python dictionaries).
 
 [![CI Status](https://github.com/jacobwilliams/jsonspice/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/jsonspice/actions)
 [![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/jsonspice)](https://github.com/jacobwilliams/jsonspice/commits/master)
