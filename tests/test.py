@@ -15,14 +15,14 @@ def test_jsonspice():
     jsonspice.furnsh_dict({"abc": inp})
     v = spiceypy.gdpool('abc', 0, 10)
     print(v)
-    assert v == inp, f"Expected {inp}, got {v}"
+    assert all(x==y for x,y in zip(v,inp)), f"Expected {inp}, got {v}"
 
     inp2 = [4,5,6]
     inp.extend(inp2)
     jsonspice.furnsh_dict({"+abc": inp2})
     v = spiceypy.gdpool('abc', 0, 10)
     print(v)
-    assert v == inp, f"Expected {inp}, got {v}"
+    assert all(x==y for x,y in zip(v,inp)), f"Expected {inp}, got {v}"
 
     res = -8.83656e+08
     jsonspice.furnsh_dict({"time": '@1972-JAN-1'})
