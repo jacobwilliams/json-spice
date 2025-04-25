@@ -41,9 +41,9 @@ Has the equivalent JSON kernel representation:
 ```json5
 // An example kernel
 {
-    "time3": "@1972-JAN-1",
-    "aaa" : 1,
-    "+aaa" : 2,
+    "TIME3": "@1972-JAN-1",
+    "AAA" : 1,
+    "+AAA" : 2,
     "VARIABLE": [1.0, 2.0, 3.0],
     "VARIABLE2": 42.0
 }
