@@ -1,9 +1,13 @@
-# jsonspice
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/jacobwilliams/jsonspice/master/media/jsonspice.png" width=800">
+</h1>
 
 Python library to monkeypatch SpiceyPy to allow JSON kernels (and Python dictionaries).
 
 [![CI Status](https://github.com/jacobwilliams/jsonspice/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/jsonspice/actions)
 [![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/jsonspice)](https://github.com/jacobwilliams/jsonspice/commits/master)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/jsonspice.svg?label=PyPI%20downloads)](https://pypi.org/project/jsonspice/)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/jsonspice.svg?label=Conda%20downloads)](https://anaconda.org/conda-forge/jsonspice)
 
 ### Description
 
