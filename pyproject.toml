@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "jsonspice"
 version = "1.0.0"
-description = "Python utility to allow JSON kernels in SpiceyPy."
+description = "Python library to monkeypatch SpiceyPy to allow JSON kernels."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT License"}
