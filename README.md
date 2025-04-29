@@ -86,4 +86,5 @@ spiceypy.furnsh({"+abc": [4,5,6]})
 * [SpiceyPy](https://github.com/AndrewAnnex/SpiceyPy) -- SpiceyPy: a Pythonic Wrapper for the SPICE Toolkit
 * J. Williams, [JSON + SPICE](https://degenerateconic.com/json-spice.html), Feb 5, 2018 (degenerateconic.com)
 * [jsonspice](https://pypi.org/project/jsonspice/) at the Python Package Index
-* [jsonspice](https://anaconda.org/conda-forge/jsonspice) at conda-forge
+* [jsonspice](https://anaconda.org/conda-forge/jsonspice) at conda-forge.
+* [jsonspice-feedstock](https://github.com/conda-forge/jsonspice-feedstock) repo.
