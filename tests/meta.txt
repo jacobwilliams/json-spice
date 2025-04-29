@@ -1,7 +1,7 @@
    \begindata
 
-   PATH_VALUES  += ( 'tests' )
-   PATH_SYMBOLS = ( 'TEST'   )
+   PATH_VALUES  = ( 'tests' )
+   PATH_SYMBOLS = ( 'TEST'  )
 
    HELLO = 1
 

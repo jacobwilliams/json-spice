@@ -78,7 +78,7 @@ def furnsh_dict(data: dict) -> None:
     kernels_to_load = get_string_array('KERNELS_TO_LOAD', data)
     if len(path_values) != len(path_symbols):
         # SPICE(PATHMISMATCH)
-        raise Exception("PATH_VALUES and PATH_SYMBOLS must have the same length in SPICE meta-kernels.")
+        raise Exception(f"Number of path symbols is {len(path_symbols)}; number of path values is {len(path_values)}; counts must match.")
     if kernels_to_load:
         for path, symbol in zip(path_values, path_symbols):
             for k in kernels_to_load:
