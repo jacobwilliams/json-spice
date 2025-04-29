@@ -50,3 +50,15 @@ def test_jsonspice():
     print(v)
     assert v[0] == '@SYNTAX-ERROR', f"Expected '@SYNTAX-ERROR', got {v[0]}"
 
+    # a meta kernel:
+    spiceypy.furnsh('meta.json')
+    v = spiceypy.gdpool('VAR1', 0, 1)
+    print(v)
+    assert v[0] == 1.0, f"Expected '1', got {v[0]}"
+    v = spiceypy.gdpool('VAR2', 0, 1)
+    print(v)
+    assert v[0] == 2.0, f"Expected '2', got {v[0]}"
+    v = spiceypy.gdpool('HELLO', 0, 1)
+    print(v)
+    assert v[0] == 1.0, f"Expected '1', got {v[0]}"
+
