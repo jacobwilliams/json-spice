@@ -178,7 +178,7 @@ def get_string_array(name: str, data: dict) -> list:
     Note that the + syntax is not supported for these.
     (does SPICE support that?)
     """
-        val = data.pop(name, None) or []
+    val = data.pop(name, None) or []
     if val:
         if not isinstance(val, (list, tuple)):
             val = [val]
