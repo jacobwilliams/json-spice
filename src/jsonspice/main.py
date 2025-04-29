@@ -69,6 +69,23 @@ def furnsh_dict(data: dict) -> None:
         The JSON kernel data as a dictionary.
     """
 
+    # first account for meta-kernel variables in this file.
+    # they must all the strings.
+    # path_values and path_symbols must be the same length.
+    # the variables themselves are not added to the pool.
+    path_values     = get_string_array('PATH_VALUES', data)
+    path_symbols    = get_string_array('PATH_SYMBOLS', data)
+    kernels_to_load = get_string_array('KERNELS_TO_LOAD', data)
+    if len(path_values) != len(path_symbols):
+        # SPICE(PATHMISMATCH)
+        raise Exception(f"Number of path symbols is {len(path_symbols)}; number of path values is {len(path_values)}; counts must match.")
+    if kernels_to_load:
+        for path, symbol in zip(path_values, path_symbols):
+            # replace the symbol with the path value
+            kernels_to_load = [k.replace(f'${symbol}', path) for k in kernels_to_load]
+        furnsh_json_kernel(kernels_to_load)
+
+    # now process the rest of the variables:
     for item, value in data.items():
 
         if isinstance(value, (list, tuple)):  # a list of values
@@ -149,3 +166,20 @@ def tparse_wrapper(x):
             return val
     else:
         return x
+
+def get_string_array(name: str, data: dict) -> list:
+    """
+    If data[name] is a string or list of strings, then
+    return it as a list of strings. Otherwise, return an empty list.
+    Remove it from the dict if present.
+
+    Note that the + syntax is not supported for these.
+    (does SPICE support that?)
+    """
+    val = data.pop(name, None) or []
+    if val:
+        if not isinstance(val, (list, tuple)):
+            val = [val]
+        if all(isinstance(x, str) for x in val):
+            return val
+    return []
