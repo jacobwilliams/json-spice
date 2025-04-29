@@ -81,10 +81,8 @@ def furnsh_dict(data: dict) -> None:
         raise Exception(f"Number of path symbols is {len(path_symbols)}; number of path values is {len(path_values)}; counts must match.")
     if kernels_to_load:
         for path, symbol in zip(path_values, path_symbols):
-            for k in kernels_to_load:
-                # replace the symbol with the path value
-                k = k.replace(f'${symbol}', path)
-        print(kernels_to_load)
+            # replace the symbol with the path value
+            kernels_to_load = [k.replace(f'${symbol}', path) for k in kernels_to_load]
         furnsh_json_kernel(kernels_to_load)
 
     # now process the rest of the variables:
