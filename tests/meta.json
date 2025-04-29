@@ -1,7 +1,7 @@
 {
 
    // meta-kernel variables:
-   "+PATH_VALUES"  : "tests",
+   "PATH_VALUES"  : "tests",
    "PATH_SYMBOLS" : "TEST",
    "KERNELS_TO_LOAD" : ["$TEST/kernel1.tpc'",
                         "$TEST/kernel2.json"],

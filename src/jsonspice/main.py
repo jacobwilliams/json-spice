@@ -174,12 +174,12 @@ def get_string_array(name: str, data: dict) -> list:
     If data[name] is a string or list of strings, then
     return it as a list of strings. Otherwise, return an empty list.
     Remove it from the dict if present.
+
+    Note that the + syntax is not supported for these.
+    (does SPICE support that?)
     """
-    if name.startswith('+'):
-        # the spice code seems to allow this.
-        name = name[1:]
-    if name in data:
         val = data.pop(name, None) or []
+    if val:
         if not isinstance(val, (list, tuple)):
             val = [val]
         if all(isinstance(x, str) for x in val):
