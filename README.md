@@ -22,6 +22,12 @@ The PCK file is a data file format that exists in no other domain. So, it may be
 pip install jsonspice
 ```
 
+#### conda
+
+```
+conda install conda-forge::jsonspice
+```
+
 ### JSON kernel format
 
 The following PCK file:
@@ -58,6 +64,8 @@ Some things to note about the JSON version:
 * Optional comments are supported (using the [JSON5](https://github.com/dpranke/pyjson5) library). Other than this, the file is a standard JSON file.
 * The SPICE "@" format for time variables is supported using a normal string that begins with the "@" character.
 * The SPICE "+=" assignment to append to an existing variable is supported by prepending the variable name with the "+" character.
+
+The JSON version of SPICE "meta-kernels" is also supported. See the [SPICE documentation](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/kernel.html) for details of that format.
 
 ### Example usage
 
