@@ -27,6 +27,8 @@ def _monkey_patch_spiceypy():
 def furnsh_json_kernel(kernel_path: Union[str, Path, dict, Iterable[str]]) -> None:
     """
     Load a JSON kernel into SPICE.
+    When jsonspice is imported, this function replaces the
+    `spiceypy.furnsh` function to support JSON kernels.
 
     See: `furnsh_dict` for details.
 
