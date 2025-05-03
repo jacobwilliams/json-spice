@@ -32,7 +32,7 @@ conda install conda-forge::jsonspice
 
 The following PCK file:
 
-```fortran
+```
 KPL/PCK
 
 \begintext

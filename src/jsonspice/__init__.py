@@ -1,4 +1,7 @@
+"""
+.. include:: ../../README.md
+"""
 
-from .main import furnsh_json_kernel, furnsh_dict, monkey_patch_spiceypy
+from .main import furnsh_json_kernel, furnsh_dict, _monkey_patch_spiceypy
 
-monkey_patch_spiceypy()  # Apply the monkey patch to spiceypy
+_monkey_patch_spiceypy()  # Apply the monkey patch to spiceypy
