@@ -41,7 +41,7 @@ jobs:
         pytest ./test.py
 
     - name: Build documentation
-      run: doc ./src/jsonspice --docformat google --output-dir ./doc --logo "https://raw.githubusercontent.com/jacobwilliams/jsonspice/master/media/jsonspice.png"
+      run: pdoc ./src/jsonspice --docformat google --output-dir ./doc --logo "https://raw.githubusercontent.com/jacobwilliams/jsonspice/master/media/jsonspice.png"
 
     - name: Deploy Documentation
       if: github.ref == 'refs/heads/master'
