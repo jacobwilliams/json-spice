@@ -5,6 +5,7 @@ Main module for loading JSON kernels into SPICE using spiceypy.
 import spiceypy
 from spiceypy import tparse, pdpool, pcpool, dtpool, gcpool, gdpool, dvpool
 from typing import Iterable, Union
+from pathlib import Path
 try:
     # this will allow loading JSON files with comments
     import json5 as json
@@ -23,14 +24,14 @@ def _monkey_patch_spiceypy():
     spiceypy.spiceypy.furnsh = furnsh_json_kernel
     spiceypy.furnsh = furnsh_json_kernel
 
-def furnsh_json_kernel(kernel_path: Union[str, dict, Iterable[str]]) -> None:
+def furnsh_json_kernel(kernel_path: Union[str, Path, dict, Iterable[str]]) -> None:
     """
     Load a JSON kernel into SPICE.
 
     See: `furnsh_dict` for details.
 
     Args:
-        kernel_path (str | list of strings | dict)
+        kernel_path (str | Path | list of strings | dict)
             The path(s) to the JSON kernel file(s) or a dictionary containing the kernel data.
     """
 
@@ -41,7 +42,9 @@ def furnsh_json_kernel(kernel_path: Union[str, dict, Iterable[str]]) -> None:
         # if an iterable is passed, assume it is a list of paths
         for p in kernel_path:
             furnsh_json_kernel(p)
-    elif isinstance(kernel_path, str):
+    elif isinstance(kernel_path, (Path, str)):
+        if (isinstance(kernel_path, Path)):
+            kernel_path = str(kernel_path.resolve())
         if not kernel_path.lower().endswith('.json'):
             # in this case, just use a normal furnsh
             _spiceypy_cache.furnsh(kernel_path)
