@@ -1,3 +1,7 @@
+"""
+Main module for loading JSON kernels into SPICE using spiceypy.
+"""
+
 import spiceypy
 from spiceypy import tparse, pdpool, pcpool, dtpool, gcpool, gdpool, dvpool
 from typing import Iterable, Union
@@ -8,11 +12,11 @@ except ImportError:
     # if not present, fallback to regular json (won't allow comments)
     import json
 
-class spiceypy_cache:
-    # just to cache the original furnsh function
+class _spiceypy_cache:
+    """Just to cache the original `spiceypy.spiceypy.furnsh` function"""
     furnsh = spiceypy.spiceypy.furnsh
 
-def monkey_patch_spiceypy():
+def _monkey_patch_spiceypy():
     """
     Monkey patch the `furnsh` function in spiceypy to support JSON kernels.
     """
@@ -25,10 +29,9 @@ def furnsh_json_kernel(kernel_path: Union[str, dict, Iterable[str]]) -> None:
 
     See: `furnsh_dict` for details.
 
-    Parameters
-    ----------
-    kernel_path : str | list of strings | dict
-        The path(s) to the JSON kernel file(s) or a dictionary containing the kernel data.
+    Args:
+        kernel_path (str | list of strings | dict)
+            The path(s) to the JSON kernel file(s) or a dictionary containing the kernel data.
     """
 
     if isinstance(kernel_path, dict):
@@ -41,7 +44,7 @@ def furnsh_json_kernel(kernel_path: Union[str, dict, Iterable[str]]) -> None:
     elif isinstance(kernel_path, str):
         if not kernel_path.lower().endswith('.json'):
             # in this case, just use a normal furnsh
-            spiceypy_cache.furnsh(kernel_path)
+            _spiceypy_cache.furnsh(kernel_path)
         else:
             # use the custom routine:
             with open(kernel_path, 'r') as f:
@@ -63,19 +66,17 @@ def furnsh_dict(data: dict) -> None:
 
     Reference: https://degenerateconic.com/json-spice.html
 
-    Parameters
-    ----------
-    d : dict
-        The JSON kernel data as a dictionary.
+    Args:
+        d (dict) The JSON kernel data as a dictionary.
     """
 
     # first account for meta-kernel variables in this file.
     # they must all the strings.
     # path_values and path_symbols must be the same length.
     # the variables themselves are not added to the pool.
-    path_values     = get_string_array('PATH_VALUES', data)
-    path_symbols    = get_string_array('PATH_SYMBOLS', data)
-    kernels_to_load = get_string_array('KERNELS_TO_LOAD', data)
+    path_values     = _get_string_array('PATH_VALUES', data)
+    path_symbols    = _get_string_array('PATH_SYMBOLS', data)
+    kernels_to_load = _get_string_array('KERNELS_TO_LOAD', data)
     if len(path_values) != len(path_symbols):
         # SPICE(PATHMISMATCH)
         raise Exception(f"Number of path symbols is {len(path_symbols)}; number of path values is {len(path_values)}; counts must match.")
@@ -94,7 +95,7 @@ def furnsh_dict(data: dict) -> None:
                 raise Exception("Empty arrays are not supported in JSON SPICE kernels.")
 
             # first if any are strings, check for @ syntax and convert to int
-            value = [tparse_wrapper(x) for x in value]  # apply tparse to all elements
+            value = [_tparse_wrapper(x) for x in value]  # apply tparse to all elements
 
             # what is the type of this list?
             if all(isinstance(x, str) for x in value):
@@ -109,7 +110,7 @@ def furnsh_dict(data: dict) -> None:
 
         elif isinstance(value, str):
             n = 1
-            value = tparse_wrapper(value)
+            value = _tparse_wrapper(value)
             t = type(value)
             value = [value]
 
@@ -155,7 +156,7 @@ def furnsh_dict(data: dict) -> None:
         elif t == str:
             pcpool ( item, value )
 
-def tparse_wrapper(x):
+def _tparse_wrapper(x):
     """wrapper for `tparse` to either return the result or the original string if parsing fails."""
     if isinstance(x, str) and x.startswith('@'):
         # convert to UTC seconds past J2000
@@ -167,7 +168,7 @@ def tparse_wrapper(x):
     else:
         return x
 
-def get_string_array(name: str, data: dict) -> list:
+def _get_string_array(name: str, data: dict) -> list:
     """
     If data[name] is a string or list of strings, then
     return it as a list of strings. Otherwise, return an empty list.

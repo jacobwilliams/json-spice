@@ -175,4 +175,5 @@ cython_debug/
 
 # misc
 .DS_Store
-./env
+/env
+/docs
