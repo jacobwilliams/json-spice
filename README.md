@@ -87,6 +87,10 @@ spiceypy.furnsh({"time": '@1972-JAN-1'})
 spiceypy.furnsh({"+abc": [4,5,6]})
 ```
 
+### Documentation
+
+The API documentation for the latest `master` branch can be found [here](https://jacobwilliams.github.io/jsonspice/).
+
 ### See also
 
 * [NAIF](https://naif.jpl.nasa.gov/naif/) -- NASA's Navigation and Ancillary Information Facility
