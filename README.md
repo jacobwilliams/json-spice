@@ -4,6 +4,7 @@
 
 Python library to monkeypatch SpiceyPy to allow JSON kernels (and Python dictionaries).
 
+[![GitHub Badge](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=fff&style=plastic)](https://github.com/jacobwilliams/jsonspice)
 [![CI Status](https://github.com/jacobwilliams/jsonspice/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/jsonspice/actions)
 [![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/jsonspice)](https://github.com/jacobwilliams/jsonspice/commits/master)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/jsonspice.svg?label=PyPI%20downloads)](https://pypi.org/project/jsonspice/)
